@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gestión de misiones</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/index.css"/>
+    </head>
+    <body>
+        <header>
+            <div class="header">
+                <h1>Gestión de AUVs</h1>
+            </div>
+        </header>
+
+        <div class="container" ng-app="App">
+            <div class="row" ng-controller="Controller">
+                <div class="col-md-7 surveys">
+                    <h2>Misiones</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Ruta</th>
+                                <th>Notas</th>
+                                <th>Estado</th>
+                                <th>Vehículo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="survey in surveys">
+                                <td><strong>{{survey.code}}</strong></td>
+                                <td><strong>{{survey.survey_name}}</strong></td>
+                                <td>{{survey.description}}</td>
+                                <td>{{survey.cruise_name}}</td>
+                                <td>{{survey.notes}}</td>
+                                <td>
+                                    <select ng-change="selectStatus(survey, status, $index)" ng-model="status">
+                                        <option ng-repeat="status in statuses" ng-selected="{{status.name === survey.status}}" value="{{status}}">{{status.name}}</option>
+                                    </select>
+                                    <div class="alert alert-danger" ng-show="isStatusError(survey, $index, status)" ng-bind="statusError"></div>
+                                    <button class="btn btn-primary" ng-show="statusChanged" ng-click="saveStatus(survey, status)">Guardar</button>
+                                </td>
+                                <td>
+                                    <select ng-change="selectVehicle(survey, vehicle, $index)" ng-model="vehicle">
+                                        <option ng-repeat="vehicle in auvs" ng-selected="{{vehicle.vehicle_id === survey.vehicle_id}}" value="{{vehicle.vehicle_id}}">{{vehicle.name}}</option>
+                                    </select>
+                                    <div class="alert alert-danger" ng-show="isVehicleError(survey, $index, vehicle)" ng-bind="vehicleError"></div>
+                                    <button class="btn btn-primary" ng-show="vehicleChanged" ng-click="saveVehicle(survey, vehicle)">Guardar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-5 surveys">
+                    <h2>Vehículos</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Status</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="auv in auvs" ng-class="{active: auv.vehicle_id === selectedAuv}" ng-click="showDevices(auv.vehicle_id)">
+                                <td><strong>{{auv.name}}</strong></td>
+                                <td>{{auv.status}}</td>
+                                <td>{{auv.make}}</td>
+                                <td>{{auv.model}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-show="isShowDevices">
+                        <h2>Sensores</h2>
+                        <ul>
+                            <li ng-repeat="device in devices">{{device.device_name}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="row">
+                <div class="col-md-5">
+                    <a href="#" class="btn btn-primary btn-large">Gestión de misiones</a>
+                </div>
+                <div class="col-md-5">
+                    <a href="#" class="btn btn-primary btn-large">Seguimiento de misiones</a>
+                </div>
+                <div class="col-md-2">
+                    <img src="img/logoCETMAR.jpg" class="img-responsive" alt="Logo CETMAR">
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>

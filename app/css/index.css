@@ -1,0 +1,90 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+
+body {
+    font-family: 'Droid Sans', sans-serif;
+}
+
+.surveys {
+    height: 100%;
+    overflow: auto;
+}
+
+.auvs {
+    height: 100%;
+    overflow: auto;
+}
+
+h1 {
+    font-size: 2em !important;
+}
+
+h2 {
+    font-size: 1em !important;
+}
+
+.header {
+    color: white;
+    background: #3E4359;
+    height: auto;
+    padding-left: 10px;
+}
+
+.header>h1 {
+    display:inline-block;
+    padding-right: 20px;
+}
+
+.header>img {
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+}
+
+thead {
+    background-color: #1F6FC6;
+    color: white;
+}
+
+tr>th {
+    font-size: 1em !important;
+}
+
+tr {
+    background-color: transparent;
+}
+
+tbody {
+    background-color: transparent;
+}
+
+td {
+    font-size: 0.8em !important;
+    background-color: transparent !important;
+}
+
+.active {
+    background-color: #3E4359;
+    color: white;
+}
+
+tbody>tr:nth-child(2n+1):not(.active) {
+    background-color: #8FBADA;
+}
+
+tbody>tr:nth-child(2n):not(.active) {
+    background-color: #D1D8DE;
+}
+
+footer {
+    text-align: center;
+    clear: both;
+    padding: 10px 10px 10px 10px;
+    margin: 0;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
